@@ -14,7 +14,7 @@ const actions = {
     let activeAccount = rootState.accounts.activeAccount;
 
     // get token balance for the active user
-    const smallUnitBalance = await drizzleInstance.contracts.TestToken.methods.balanceOf(activeAccount).call()
+    const smallUnitBalance = await drizzleInstance.contracts.TestToken.methods.balanceOf(activeAccount).call();
 
     // remove the 18 decimals and commit as balance
     commit("setTestTokenBalance", drizzleInstance.web3.utils.fromWei(smallUnitBalance, "ether"));
@@ -23,7 +23,7 @@ const actions = {
 
 const mutations = {
   setTestTokenBalance(state, balance) {
-    state.testTokenBalance = balance
+    state.testTokenBalance = balance;
   }
 };
 

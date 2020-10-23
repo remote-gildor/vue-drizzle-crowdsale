@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div v-if="isDrizzleInitialized">
         <b-jumbotron header="Welcome to crowdsale!" lead="Help us launch the project">
             <br>
             <p>Click the button below to see the Crowdsale page</p>
@@ -7,12 +8,20 @@
                 <b-button variant="primary" href="/crowdsale">Buy tokens!</b-button>
             </router-link>
         </b-jumbotron>
+        </div>
+
+        <div v-else>Loading...</div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-     name: "Home"
+     name: "Home",
+     computed: {
+      ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
+     }
 }
 </script>
 

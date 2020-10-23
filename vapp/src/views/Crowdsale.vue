@@ -1,20 +1,28 @@
 <template>
+<div v-if="isDrizzleInitialized">
   <b-container class="mt-3">
+
     <b-row>
       <b-col md="4" offset-md="4" class="text-center">
         <h1>Crowdsale</h1>
 
-        <b-progress :max="crowdsaleCap" height="2rem">
+        <p>Crowdsale cap: {{ getTestCrowdsaleEtherCap }} ETH</p>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col cols=12>
+        <b-progress :max="getTestCrowdsaleEtherCap" height="2rem">
           <b-progress-bar :value="currentValue">
-            <span><strong>{{ currentValue.toFixed(2) }} ETH / {{ crowdsaleCap }} ETH</strong></span>
+            <span><strong>{{ currentValue.toFixed(2) }} ETH / {{ getTestCrowdsaleEtherCap }} ETH</strong></span>
           </b-progress-bar>
         </b-progress>
 
       </b-col>
     </b-row>
 
-    <b-row>
-      <b-col cols=4>
+    <b-row class="mt-4">
+      <b-col md="4" offset-md="4" class="text-center">
         <b-card title="Buy tokens" sub-title="Enter the amount of ETH to invest">
           <b-form @submit.prevent="onSubmit">
             <b-form-group id="input-group-1" label-for="crowdsale-ether-field">
@@ -37,43 +45,29 @@
       </b-col>
     </b-row>
   </b-container>
+</div>
+
+<div v-else>Loading...</div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-
-const args = {
-  contractName: "TestCrowdsale",
-  method: "cap",
-  methodArgs: ""
-}
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: "Crowdsale",
     computed: {
-      ...mapGetters("drizzle", ["drizzleInstance"]),
+      ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
       ...mapGetters("contracts", ["getContractData"]),
       ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
-      crowdsaleCap() {
-        let capWei = this.getContractData({
-          contract: args.contractName,
-          method: args.method
-        });
-
-        return this.drizzleInstance.web3.utils.fromWei(capWei.toString(), "ether");
-      }
+      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap"]),
     },
     methods: {
-      onSubmit() {
-        window.console.log(this.ethValue);
+      ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherCap"]),
 
+      onSubmit() {
         let sender = this.activeAccount;
         let recipient = this.drizzleInstance.contracts["TestCrowdsale"].address;
-        window.console.log(sender);
-        window.console.log(recipient);
-
         let valueWei = this.drizzleInstance.web3.utils.toWei(this.ethValue, "ether");
-        window.console.log(valueWei);
 
         this.drizzleInstance.web3.eth.sendTransaction({
             from: sender,
@@ -83,12 +77,12 @@ export default {
       }
     },
     created() {
-        this.$store.dispatch("drizzle/REGISTER_CONTRACT", args);
+      this.fetchTestCrowdsaleEtherCap();
     },
     data() {
       return {
         ethValue: "",
-        currentValue: 1
+        currentValue: 10
       }
     }
 }
