@@ -32,7 +32,7 @@ export default {
         ...mapActions("profile", ["fetchTestTokenBalance"])
     },
     created() {
-        this.fetchTestTokenBalance();
+        this.$store.dispatch("profile/fetchTestTokenBalance");
     }
 }
 </script>

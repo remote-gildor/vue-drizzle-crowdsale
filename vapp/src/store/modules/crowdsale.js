@@ -10,9 +10,7 @@ const getters = {
 
 const actions = {
   async fetchTestCrowdsaleEtherCap({ commit, rootState }) {
-    
     let drizzleInstance = rootState.drizzle.drizzleInstance;
-
     const weiCap = await drizzleInstance.contracts.TestCrowdsale.methods.cap().call();
 
     commit("setTestCrowdsaleEtherCap", drizzleInstance.web3.utils.fromWei(weiCap, "ether"));

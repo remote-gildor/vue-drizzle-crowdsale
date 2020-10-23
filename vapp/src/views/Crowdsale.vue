@@ -14,7 +14,7 @@
       <b-col cols=12>
         <b-progress :max="getTestCrowdsaleEtherCap" height="2rem">
           <b-progress-bar :value="currentValue">
-            <span><strong>{{ currentValue.toFixed(2) }} ETH / {{ getTestCrowdsaleEtherCap }} ETH</strong></span>
+            <span><strong>{{ currentValue.toFixed(2) }} ETH</strong></span>
           </b-progress-bar>
         </b-progress>
 
@@ -77,12 +77,12 @@ export default {
       }
     },
     created() {
-      this.fetchTestCrowdsaleEtherCap();
+      this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherCap");
     },
     data() {
       return {
         ethValue: "",
-        currentValue: 10
+        currentValue: 10.1
       }
     }
 }
