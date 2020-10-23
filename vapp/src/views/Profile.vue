@@ -13,28 +13,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: "Profile",
     computed: {
         ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
         ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
+        ...mapGetters("profile", ["getTestTokenBalance"]),
         userAccount() {
             return this.activeAccount
         },
         getEthBalance() {
             return this.drizzleInstance.web3.utils.fromWei(this.activeBalance, "ether");
-        },
-        getTestTokenBalance() {
-            let state = this.drizzleInstance.store.getState();
-            const dataKey = this.drizzleInstance.contracts.TestToken.methods.balanceOf.cacheCall(this.activeAccount);
-
-            let balanceSmall = state.contracts.TestToken.balanceOf[dataKey]["value"];
-
-            // remove the 18 decimals
-            return this.drizzleInstance.web3.utils.fromWei(balanceSmall, "ether");
         }
+    },
+    methods: {
+        ...mapActions("profile", ["fetchTestTokenBalance"])
+    },
+    created() {
+        this.fetchTestTokenBalance();
     }
 }
 </script>

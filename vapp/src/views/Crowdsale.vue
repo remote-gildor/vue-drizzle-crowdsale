@@ -1,9 +1,17 @@
 <template>
   <b-container class="mt-3">
-    <h2>Crowdsale page</h2>
-    <ul>
-      <li><strong>Crowdsale cap:</strong> {{ crowdsaleCap }} ETH</li>
-    </ul>
+    <b-row>
+      <b-col md="4" offset-md="4" class="text-center">
+        <h1>Crowdsale</h1>
+
+        <b-progress :max="crowdsaleCap" height="2rem">
+          <b-progress-bar :value="currentValue">
+            <span><strong>{{ currentValue.toFixed(2) }} ETH / {{ crowdsaleCap }} ETH</strong></span>
+          </b-progress-bar>
+        </b-progress>
+
+      </b-col>
+    </b-row>
 
     <b-row>
       <b-col cols=4>
@@ -79,7 +87,8 @@ export default {
     },
     data() {
       return {
-        ethValue: ""
+        ethValue: "",
+        currentValue: 1
       }
     }
 }
