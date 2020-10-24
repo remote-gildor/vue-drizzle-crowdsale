@@ -13,8 +13,8 @@
     <b-row>
       <b-col cols=12>
         <b-progress :max="getTestCrowdsaleEtherCap" height="2rem">
-          <b-progress-bar :value="currentValue">
-            <span><strong>{{ currentValue.toFixed(2) }} ETH</strong></span>
+          <b-progress-bar :value="getTestCrowdsaleEtherRaised">
+            <span><strong>{{ getTestCrowdsaleEtherRaised }} ETH</strong></span>
           </b-progress-bar>
         </b-progress>
 
@@ -59,10 +59,11 @@ export default {
       ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
       ...mapGetters("contracts", ["getContractData"]),
       ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
-      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap"]),
+      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap", "getTestCrowdsaleEtherRaised"]),
     },
     methods: {
       ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherCap"]),
+      ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherRaised"]),
 
       onSubmit() {
         let sender = this.activeAccount;
@@ -78,11 +79,11 @@ export default {
     },
     created() {
       this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherCap");
+      this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherRaised");
     },
     data() {
       return {
-        ethValue: "",
-        currentValue: 10.1
+        ethValue: ""
       }
     }
 }

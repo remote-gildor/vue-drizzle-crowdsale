@@ -3,6 +3,8 @@
         <b-container class="mt-3">
             <h2>Profile</h2>
 
+            <Gravatar :email="activeAccount" default-img="robohash" />
+
             <p>Your account: {{ activeAccount }}</p>
             <p>Your ETH balance: {{ getEthBalance }} ETH</p>  
             <p>Your TT balance: {{ getTestTokenBalance }} TT</p>
@@ -14,9 +16,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Gravatar from "vue-gravatar";
 
 export default {
     name: "Profile",
+    components: {
+        Gravatar
+    },
     computed: {
         ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
         ...mapGetters("accounts", ["activeAccount", "activeBalance"]),

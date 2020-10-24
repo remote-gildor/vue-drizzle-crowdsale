@@ -13,6 +13,7 @@
 - Vue Router
 - Vue Bootstrap
 - Vue Toasted
+- Vue Gravatar
 
 ## Contract calls
 
