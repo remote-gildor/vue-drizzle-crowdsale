@@ -2,7 +2,7 @@
     <!-- NAVBAR -->
     <b-navbar toggleable="lg" type="dark" variant="primary">
         <router-link to="/">
-            <b-navbar-brand href="/">TestToken Crowdsale</b-navbar-brand>
+            <b-navbar-brand href="/">TestToken (TT) Crowdsale</b-navbar-brand>
         </router-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

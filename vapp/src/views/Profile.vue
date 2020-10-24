@@ -1,13 +1,25 @@
 <template>
     <div v-if="isDrizzleInitialized">
         <b-container class="mt-3">
-            <h2>Profile</h2>
+            <b-row class="mt-4">
+                <b-col md="4" offset-md="4" class="text-center">
+                    <h1>Profile</h1>
 
-            <Gravatar :email="activeAccount" default-img="robohash" />
+                    <b-card class="mb-2">
+                        <Gravatar class="img-fluid" :email="activeAccount" default-img="robohash" size=200 />
 
-            <p>Your account: {{ activeAccount }}</p>
-            <p>Your ETH balance: {{ getEthBalance }} ETH</p>  
-            <p>Your TT balance: {{ getTestTokenBalance }} TT</p>
+                        <b-card-text class="mt-2">
+                            <p>{{ activeAccount }}</p>
+                            <p><strong>Your ETH balance:</strong> {{ getEthBalance }} ETH</p>  
+                            <p><strong>Your TT balance:</strong> {{ getTestTokenBalance }} TT</p>
+                        </b-card-text>
+
+                        <router-link to="/crowdsale">
+                            <b-button variant="primary" href="/crowdsale">Buy tokens!</b-button>
+                        </router-link>
+                    </b-card>
+                </b-col>
+            </b-row>
         </b-container>
     </div>
 

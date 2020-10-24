@@ -23,11 +23,11 @@
 
     <b-row class="mt-4">
       <b-col md="4" offset-md="4" class="text-center">
-        <b-card title="Buy tokens" sub-title="Enter the amount of ETH to invest">
+        <b-card title="Buy TT tokens" sub-title="Enter the amount of ETH to invest">
           <b-form @submit.prevent="onSubmit">
             <b-form-group id="input-group-1" label-for="crowdsale-ether-field">
 
-              <b-input-group append="ETH">
+              <b-input-group append="ETH" class="mt-4 mb-2">
                 <b-form-input 
                   id="crowdsale-ether-field" 
                   v-model="ethValue" 
