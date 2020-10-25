@@ -34,9 +34,14 @@
                   type="text" 
                   required 
                   placeholder="0.0"
+                  trim
                 >
                 </b-form-input>
+                
               </b-input-group>
+              <b-form-text id="crowdsale-ether-field-feedback">
+                You will receive <strong>{{ ethValue * getTestCrowdsaleRate }} TT</strong> tokens.
+                </b-form-text>
 
               <b-button class="mt-2" type="submit" variant="primary">Submit</b-button>
             </b-form-group>
@@ -59,11 +64,12 @@ export default {
       ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
       ...mapGetters("contracts", ["getContractData"]),
       ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
-      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap", "getTestCrowdsaleEtherRaised"]),
+      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap", "getTestCrowdsaleEtherRaised", "getTestCrowdsaleRate"]),
     },
     methods: {
       ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherCap"]),
       ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherRaised"]),
+      ...mapActions("crowdsale", ["fetchTestCrowdsaleRate"]),
 
       onSubmit() {
         let sender = this.activeAccount;
@@ -80,10 +86,11 @@ export default {
     created() {
       this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherCap");
       this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherRaised");
+      this.$store.dispatch("crowdsale/fetchTestCrowdsaleRate");
     },
     data() {
       return {
-        ethValue: ""
+        ethValue: 1
       }
     }
 }

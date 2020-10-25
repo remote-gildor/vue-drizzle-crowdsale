@@ -93,8 +93,7 @@ You can see the rest od the implementation in this repository (`vapp/src/store/m
 
 ## TODO
 
-Minimum viable version is completed, but there's a lot of other work to polish the dApp (the Vue part especially):
-
-- Show how many tokens the person gets when they enter the ETH amount
+- Update the state when the event is returned
+- Implement Vue Toasted
 - Write Solidity sanity tests
 - etc.

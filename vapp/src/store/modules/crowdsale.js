@@ -1,6 +1,7 @@
 const state = {
-  testCrowdsaleEtherCap: 0,
-  testCrowdsaleEtherRaised: 0
+  testCrowdsaleEtherCap: 0, // this value (cap) could be hardcoded in order to save on node calls
+  testCrowdsaleEtherRaised: 0,
+  testCrowdsaleRate: 0 // this could also be hardcoded if it remains the same through the whole crowdsale
 };
 
 const getters = {
@@ -9,6 +10,9 @@ const getters = {
   },
   getTestCrowdsaleEtherRaised(state) {
     return state.testCrowdsaleEtherRaised;
+  },
+  getTestCrowdsaleRate(state) {
+    return state.testCrowdsaleRate;
   }
 };
 
@@ -24,6 +28,12 @@ const actions = {
     const weiRaised = await drizzleInstance.contracts.TestCrowdsale.methods.weiRaised().call();
 
     commit("setTestCrowdsaleEtherRaised", drizzleInstance.web3.utils.fromWei(weiRaised, "ether"));
+  },
+  async fetchTestCrowdsaleRate({ commit, rootState }) {
+    let drizzleInstance = rootState.drizzle.drizzleInstance;
+    const rate = await drizzleInstance.contracts.TestCrowdsale.methods.rate().call();
+
+    commit("setTestCrowdsaleRate", rate);
   }
 };
 
@@ -33,6 +43,9 @@ const mutations = {
   },
   setTestCrowdsaleEtherRaised(state, raised) {
     state.testCrowdsaleEtherRaised = raised;
+  },
+  setTestCrowdsaleRate(state, rate) {
+    state.testCrowdsaleRate = rate;
   }
 };
 
