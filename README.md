@@ -135,11 +135,9 @@ created() {
 <p>Your token balance : {{ getTestTokenBalance }} TT</p>
 ```
 
-### Using Vuex (recommended)
+### Using an ordinary web3 call()
 
-A better option is to use Vuex store, because it gives you more control.
-
-This is how an action in Vuex store should look like:
+Another option is to use custom Vuex store and a normal web3 call():
 
 ```javascript
 const actions = {
@@ -160,7 +158,7 @@ You can see the rest od the implementation in this repository (`vapp/src/store/m
 
 ## TODO
 
-- Update the state when the event is returned
-- Implement Vue Toasted
+- Toast that shows the spinning wheel waiting for a tx to be confirmed
+- Implement Web3Modal
 - Write Solidity sanity tests
 - etc.
