@@ -6,15 +6,15 @@
       <b-col md="4" offset-md="4" class="text-center">
         <h1>Crowdsale</h1>
 
-        <p>Crowdsale cap: {{ getTestCrowdsaleEtherCap }} ETH</p>
+        <p>Crowdsale cap: {{ getCrowdsaleCap }} ETH</p>
       </b-col>
     </b-row>
 
     <b-row>
       <b-col cols=12>
-        <b-progress :max="getTestCrowdsaleEtherCap" height="2rem">
-          <b-progress-bar :value="getTestCrowdsaleEtherRaised">
-            <span><strong>{{ getTestCrowdsaleEtherRaised }} ETH</strong></span>
+        <b-progress :max="getCrowdsaleCap" height="2rem">
+          <b-progress-bar :value="getCrowdsaleRaised">
+            <span><strong>{{ getCrowdsaleRaised }} ETH</strong></span>
           </b-progress-bar>
         </b-progress>
 
@@ -40,7 +40,7 @@
                 
               </b-input-group>
               <b-form-text id="crowdsale-ether-field-feedback">
-                You will receive <strong>{{ ethValue * getTestCrowdsaleRate }} TT</strong> tokens.
+                You will receive <strong>{{ ethValue * getCrowdsaleRate }} TT</strong> tokens.
                 </b-form-text>
 
               <b-button class="mt-2" type="submit" variant="primary">Submit</b-button>
@@ -56,21 +56,51 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     name: "Crowdsale",
     computed: {
-      ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
-      ...mapGetters("contracts", ["getContractData"]),
       ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
-      ...mapGetters("crowdsale", ["getTestCrowdsaleEtherCap", "getTestCrowdsaleEtherRaised", "getTestCrowdsaleRate"]),
+      ...mapGetters("contracts", ["getContractData"]),
+      ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
+
+      getCrowdsaleCap() {
+        let capWei = this.getContractData({
+          contract: "TestCrowdsale",
+          method: "cap"
+        });
+
+        if (capWei === "loading") return "0";
+
+        let cap = this.drizzleInstance.web3.utils.fromWei(capWei, "ether");
+
+        return cap
+      },
+      getCrowdsaleRate() {
+        let rate = this.getContractData({
+          contract: "TestCrowdsale",
+          method: "rate"
+        });
+
+        if (rate === "loading") return "0";
+
+        return rate
+      },
+      getCrowdsaleRaised() {
+        let raisedWei = this.getContractData({
+          contract: "TestCrowdsale",
+          method: "weiRaised"
+        });
+
+        if (raisedWei === "loading") return "0";
+
+        let raised = this.drizzleInstance.web3.utils.fromWei(raisedWei, "ether");
+
+        return raised
+      }
     },
     methods: {
-      ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherCap"]),
-      ...mapActions("crowdsale", ["fetchTestCrowdsaleEtherRaised"]),
-      ...mapActions("crowdsale", ["fetchTestCrowdsaleRate"]),
-
       onSubmit() {
         let sender = this.activeAccount;
         let recipient = this.drizzleInstance.contracts["TestCrowdsale"].address;
@@ -84,13 +114,27 @@ export default {
       }
     },
     created() {
-      this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherCap");
-      this.$store.dispatch("crowdsale/fetchTestCrowdsaleEtherRaised");
-      this.$store.dispatch("crowdsale/fetchTestCrowdsaleRate");
+      this.$store.dispatch("drizzle/REGISTER_CONTRACT", {
+        contractName: "TestCrowdsale",
+        method: "cap",
+        methodArgs: []
+      });
+
+      this.$store.dispatch("drizzle/REGISTER_CONTRACT", {
+        contractName: "TestCrowdsale",
+        method: "rate",
+        methodArgs: []
+      });
+
+      this.$store.dispatch("drizzle/REGISTER_CONTRACT", {
+        contractName: "TestCrowdsale",
+        method: "weiRaised",
+        methodArgs: []
+      });
     },
     data() {
       return {
-        ethValue: 1
+        ethValue: "1"
       }
     }
 }
