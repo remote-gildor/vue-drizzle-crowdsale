@@ -6,11 +6,11 @@
                     <h1>Profile</h1>
 
                     <b-card class="mb-2">
-                        <Gravatar class="img-fluid" :email="activeAccount" default-img="robohash" size=200 />
+                        <Gravatar class="img-fluid" :email="activeAccount" default-img="robohash" :size=200 />
 
                         <b-card-text class="mt-2">
                             <p>{{ activeAccount }}</p>
-                            <p><strong>Your ETH balance:</strong> {{ getEthBalance }} ETH</p>  
+                            <p><strong>Your ETH balance:</strong> {{ getEthBalance }} ETH</p>
                             <p><strong>Your TT balance:</strong> {{ getTestTokenBalance }} TT</p>
                         </b-card-text>
 
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Gravatar from "vue-gravatar";
 
 export default {
@@ -36,9 +36,10 @@ export default {
         Gravatar
     },
     computed: {
-        ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
         ...mapGetters("accounts", ["activeAccount", "activeBalance"]),
+        ...mapGetters("drizzle", ["isDrizzleInitialized", "drizzleInstance"]),
         ...mapGetters("profile", ["getTestTokenBalance"]),
+
         userAccount() {
             return this.activeAccount
         },
@@ -46,11 +47,11 @@ export default {
             return this.drizzleInstance.web3.utils.fromWei(this.activeBalance, "ether");
         }
     },
-    methods: {
-        ...mapActions("profile", ["fetchTestTokenBalance"])
-    },
     created() {
         this.$store.dispatch("profile/fetchTestTokenBalance");
+    },
+    methods: {
+        ...mapActions("profile", ["fetchTestTokenBalance"])
     }
 }
 </script>

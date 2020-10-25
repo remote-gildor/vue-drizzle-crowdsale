@@ -2,7 +2,11 @@
   <div v-if="isDrizzleInitialized" id="app">
     <Navbar />
 
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
+
+    <Toast />
   </div>
 
   <div v-else>Loading...</div>
@@ -11,11 +15,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import Navbar from "./components/Navbar";
+import Toast from "./components/Toast";
 
 export default {
   name: 'app',
   components: {
-    Navbar
+    Navbar,
+    Toast
   },
   computed: mapGetters('drizzle', ['isDrizzleInitialized'])
 }

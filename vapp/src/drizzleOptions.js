@@ -11,7 +11,7 @@ const options = {
   },
   contracts: [TestToken, TestCrowdsale],
   events: {
-    // SimpleStorage: ['StorageSet']
+    TestCrowdsale: ['TokensPurchased']
   },
   polls: {
     accounts: 15000
