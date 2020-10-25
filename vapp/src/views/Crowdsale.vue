@@ -95,7 +95,7 @@ export default {
 
         if (raisedWei === "loading") return "0";
 
-        let raised = this.drizzleInstance.web3.utils.fromWei(raisedWei, "ether");
+        let raised = Number(this.drizzleInstance.web3.utils.fromWei(raisedWei, "ether")).toFixed(2);
 
         return raised
       }
