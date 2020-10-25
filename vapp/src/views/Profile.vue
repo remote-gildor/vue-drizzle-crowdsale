@@ -10,8 +10,8 @@
 
                         <b-card-text class="mt-2">
                             <p>{{ activeAccount }}</p>
-                            <p><strong>Your ETH balance:</strong> {{ getEthBalance }} ETH</p>
-                            <p><strong>Your TT balance:</strong> {{ getTestTokenBalance }} TT</p>
+                            <p><strong>Your ETH balance:</strong> {{ Number(getEthBalance).toFixed(4) }} ETH</p>
+                            <p><strong>Your TT balance:</strong> {{ Number(getTestTokenBalance).toFixed(2) }} TT</p>
                         </b-card-text>
 
                         <router-link to="/crowdsale">
