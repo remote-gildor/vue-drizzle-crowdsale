@@ -1,5 +1,7 @@
 # An example Vue Drizzle token crowdsale dApp
 
+> Say "hello" [here](https://github.com/remote-gildor/vue-drizzle-crowdsale/issues/2), if you like this repo/project :)
+
 ## Setup
 
 ### Install truffle
@@ -158,7 +160,6 @@ You can see the rest od the implementation in this repository (`vapp/src/store/m
 
 ## TODO
 
-- Toast that shows the spinning wheel waiting for a tx to be confirmed
 - Implement Web3Modal
 - Write Solidity sanity tests
 - etc.

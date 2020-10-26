@@ -3,11 +3,7 @@
 </template>
 
 <script>
-import Toasted from 'vue-toasted';
-import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
-
-Vue.use(Toasted);
 
 export default {
   computed: {
@@ -27,7 +23,13 @@ export default {
         display = "You have just bought " + tokens + " TT tokens! :)";
       }
 
-      const subOptions = { duration: 5000 };
+      const subOptions = {
+        theme: "bubble",
+        position: "top-center", 
+        duration: 5000,
+        type: "success"
+      };
+
       this.$toasted.show(display, subOptions);
     };
 

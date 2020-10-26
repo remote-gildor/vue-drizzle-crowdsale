@@ -27,5 +27,6 @@ export default new Router({
             name: "profile",
             component: Profile
         }
-    ]
+    ],
+    linkActiveClass: "active"
 });

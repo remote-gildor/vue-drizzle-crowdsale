@@ -1,4 +1,5 @@
 <template>
+<div>
   <div v-if="isDrizzleInitialized" id="app">
     <Navbar />
 
@@ -9,7 +10,13 @@
     <Toast />
   </div>
 
-  <div v-else>Loading...</div>
+  <div v-else>
+    <b-jumbotron header="Loading..." lead="Please check your MetaMask if this doesn't load soon." bg-variant="warning">
+      <p>Make sure you have MetaMask installed and properly configured. Then click the button below to reload the website.</p>
+      <b-button variant="dark" href="/">Reload page</b-button>
+    </b-jumbotron>
+  </div>
+</div>
 </template>
 
 <script>
