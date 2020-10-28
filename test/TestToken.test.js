@@ -12,6 +12,22 @@ contract("TestToken", accounts => {
 
     });
 
+    it("has the correct symbol", async () => {
+
+      const inst = await TestToken.deployed();
+      const symbol = await inst.symbol();
+      assert.equal(symbol, "TT");
+
+    });
+
+    it("has the correct number of decimals", async () => {
+
+      const inst = await TestToken.deployed();
+      const decimals = await inst.decimals();
+      assert.equal(decimals, 18);
+
+    });
+
   });
 
 });

@@ -158,8 +158,18 @@ const actions = {
 
 You can see the rest od the implementation in this repository (`vapp/src/store/modules/profile.js` and `vapp/src/views/Profile.vue`).
 
+## Tests
+
+### Solidity tests
+
+Run Solidity tests with Truffle:
+
+```bash
+truffle test
+```
+
 ## TODO
 
 - Implement Web3Modal
-- Write Solidity sanity tests
+- Write Vue tests
 - etc.

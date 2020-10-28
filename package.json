@@ -17,6 +17,8 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@openzeppelin/test-helpers": "^0.5.9",
+    "chai": "^4.2.0",
     "openzeppelin-solidity": "^2.5.1"
   }
 }
