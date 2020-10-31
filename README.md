@@ -162,14 +162,23 @@ You can see the rest od the implementation in this repository (`vapp/src/store/m
 
 ### Solidity tests
 
+Solidity tests are in the `/test` folder in root of the project.
+
 Run Solidity tests with Truffle:
 
 ```bash
 truffle test
 ```
 
-## TODO
+### Vue tests
 
-- Implement Web3Modal
-- Write Vue tests
-- etc.
+Vue tests are in `/vapp/tests`.
+
+Run Vue tests like this:
+
+```bash
+cd vapp
+npm run test:unit
+```
+
+An example test is already created (`home.spec.js`). As you can see, there needs to be a **mock** Vue Store (see `helpers/storeHelper.js`). The Vue tests cannot connect to Ganache (if you've figured out the opposite, please open an issue in this repo).
