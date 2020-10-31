@@ -1,5 +1,5 @@
 {
-  "name": "drizzle-vue-box",
+  "name": "vue-drizzle-crowdsale",
   "version": "0.0.1",
   "description": "",
   "main": "truffle-config.js",
@@ -11,14 +11,15 @@
   },
   "keywords": [],
   "author": {
-    "name": "Amal Sudama",
-    "email": "amal@trufflesuite.com",
-    "url": "http://github.com/truffle-box/drizzle-vue-box"
+    "name": "Gildor",
+    "url": "https://github.com/remote-gildor/vue-drizzle-crowdsale"
   },
   "license": "ISC",
   "dependencies": {
-    "@openzeppelin/test-helpers": "^0.5.9",
-    "chai": "^4.2.0",
     "openzeppelin-solidity": "^2.5.1"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.9",
+    "chai": "^4.2.0"
   }
 }
