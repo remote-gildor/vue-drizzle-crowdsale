@@ -1,0 +1,16 @@
+{
+  "ignore": [
+
+  ],
+  "commands": {
+    "Compile contracts": "truffle compile",
+    "Migrate contracts": "truffle migrate",
+    "Test contracts": "truffle test",
+    "Test Vue app": "cd vapp && npm run test:unit",
+    "Run Vue app": "cd vapp && npm run serve",
+    "Build Vue app": "cd vapp && npm run build"
+  },
+  "hooks": {
+    "post-unpack": "npm install && cd vapp && npm install"
+  }
+}
